@@ -34,4 +34,4 @@ jobs:
          committer: ${{ secrets.GIT_USERNAME }} <${{ secrets.GIT_EMAIL }}>
          author: ${{ secrets.GIT_USERNAME }} <${{ secrets.GIT_EMAIL }}>
        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
