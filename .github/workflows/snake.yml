@@ -31,8 +31,7 @@ jobs:
             
       - name: Push changes
         run: |
-          cp dist/* dist/
-          git add .
+          git add dist/github-contribution-grid-snake.svg dist/github-contribution-grid-snake-dark.svg
           git commit -m "Update Snake Animation - $(date '+%A, %B %d, %Y at %I:%M:%S %p %Z')"
           git push
         env:
