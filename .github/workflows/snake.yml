@@ -32,7 +32,7 @@ jobs:
       - name: Push changes
         run: |
           ls ./
-          git add --force .
+          git add --force -A
           git commit -m "Update Snake Animation - $(date '+%A, %B %d, %Y at %I:%M:%S %p %Z')"
           git push
         env:
