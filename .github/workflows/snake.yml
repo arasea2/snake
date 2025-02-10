@@ -1,0 +1,40 @@
+name: Generate Snake Animation
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+          
+      - name: Configure Git
+        run: |
+          git config --global user.name "arasea2"
+          git config --global user.email "144518692+arasea2@users.noreply.github.com"
+
+      - uses: Platane/snk@v3
+        id: snake-gif
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      - name: Append Timestamp to Snake Animation
+        run: |
+          echo "<!-- Generated on $(date '+%Y-%m-%d %H:%M:%S %Z') -->" >> dist/github-contribution-grid-snake.svg
+          echo "<!-- Generated on $(date '+%Y-%m-%d %H:%M:%S %Z') -->" >> dist/github-contribution-grid-snake-dark.svg
+    
+      - name: Push changes
+        run: |
+          git add --force -A
+          git commit -m "Update Snake Animation - $(date '+%A, %B %d, %Y at %I:%M:%S %p %Z')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
